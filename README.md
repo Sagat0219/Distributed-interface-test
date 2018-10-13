@@ -23,8 +23,7 @@ ps: redis记得要设置允许远程访问。
 
 ## 关于测试用例：  
 位置在 ~\xlstest-Distributed\xlstest\case\test.xlsx  
-样本中测试用例主要为GET和POST请求，每行即一条用例。  
-通过框架会导入到redis队列中被调度执行。  
+样本中测试用例主要为GET和POST请求，每行即一条用例。通过框架会导入到redis队列中被调度执行。  
   
 因为使用gerapy打包成egg时不会自动包含用例文件，所以需要对gerapy中的打包脚本（build.py）做修改：  
 假设文件安装位置在 C:\Program Files\Python36\Lib\site-packages\gerapy\server\core\build.py  
@@ -57,4 +56,4 @@ setup(
 将整个xlstest-Distributed文件夹拷贝到Gerapy的projects文件夹下(~\gerapy\projects)  
 通过浏览器访问Gerapy(http://127.0.0.1:8000/)  
 在“项目管理”中进行打包并部署到指定的主机（主机即是docker容器）  
-然后就可以在“主机管理”选择对应的主机点击“运行”来执行调度了
+然后就可以在“主机管理”选择对应的主机点击“运行”来执行调度了。
