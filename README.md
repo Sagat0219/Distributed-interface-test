@@ -1,8 +1,8 @@
 # Distributed-interface-test
 
-本套自动化接口测试框架是利用scrapy爬虫框架来实现的。
-可将整个项目文件夹（xlstest-Distributed）部署到scrapyd服务程序中，通过schedule.json调度运行：
-`curl http://127.0.0.1:6800/schedule.json -d project=xlstest -d spider=httpbin`
+本套自动化接口测试框架是利用scrapy爬虫框架来实现的。  
+可将整个项目文件夹（xlstest-Distributed）部署到scrapyd服务程序中，通过schedule.json调度运行：  
+`curl http://127.0.0.1:6800/schedule.json -d project=xlstest -d spider=httpbin`  
 
 **推荐的用法是部署到docker容器中，通过本地安装Gerapy进行分布式管理**
 
@@ -11,15 +11,15 @@
 **Redis**
 **Gerapy**
 ps: redis记得要设置允许远程访问。
-设置文件在：C:\Program Files\Redis\redis.windows-service.conf
-`# bind 127.0.0.1 -- 注释掉`
-`protected-mode no --设置为 no,表明不已保护模式运行`
+设置文件在：C:\Program Files\Redis\redis.windows-service.conf  
+`# bind 127.0.0.1 -- 注释掉`  
+`protected-mode no --设置为 no,表明不已保护模式运行`  
 
 ## 容器要求：
 已安装python3.6及相关第三方库（xlrd，prettytable，setuptools，Scrapy）
 或可直接使用我创建的镜像来生成容器：
-`docker pull sagat0219/scrapyd`
-`docker run -d -p 6800:6800 sagat0219/scrapyd:v1 scrapyd`
+`docker pull sagat0219/scrapyd`  
+`docker run -d -p 6800:6800 sagat0219/scrapyd:v1 scrapyd`  
 
 ## 关于测试用例：
 位置在 ~\Distributed-interface-test\xlstest-Distributed\xlstest\case\test.xlsx
@@ -54,7 +54,7 @@ setup(
 )"""
 ```
 ## Gerapy使用方法：
-将整个xlstest-Distributed文件夹拷贝到Gerapy的projects文件夹下(~\gerapy\projects)
-通过浏览器访问Gerapy(http://127.0.0.1:8000/)
-在“项目管理”中进行打包并部署到指定的主机（主机即是docker容器）
+将整个xlstest-Distributed文件夹拷贝到Gerapy的projects文件夹下(~\gerapy\projects)  
+通过浏览器访问Gerapy(http://127.0.0.1:8000/)  
+在“项目管理”中进行打包并部署到指定的主机（主机即是docker容器）  
 然后就可以在“主机管理”选择对应的主机点击“运行”来执行调度了
