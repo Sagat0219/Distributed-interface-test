@@ -1,0 +1,62 @@
+# -*- coding: utf-8 -*-
+import scrapy
+from scrapy import signals
+from scrapy import Request
+from xlstest.func import excel
+from xlstest.func import constants as cs
+import os
+
+module = 'user' #sheet name
+file_name = cs.FILE_NAME
+base_url = 'http://httpbin.org'
+path = (os.path.join(os.path.abspath('.'),'case',file_name))
+
+excel.open_excel(path)
+sheet = excel.get_sheet(module)
+rows = excel.get_rows(sheet)
+
+i= 2
+
+class HttpbinSpider(scrapy.Spider):
+    name = 'httpbin'
+    allowed_domains = ['httpbin.org']
+    start_urls = ['http://httpbin.org/']
+
+    def start_requests(self):
+        global i
+        testNumber = str(int(excel.get_content(sheet, i, cs.CASE_NUMBER)))
+        testName = excel.get_content(sheet, i, cs.CASE_NAME)
+        testUrl = excel.get_content(sheet, i, cs.CASE_URL)
+        testUrl = base_url + testUrl
+        testMethod = excel.get_content(sheet, i, cs.CASE_METHOD)
+        testHeaders = eval(excel.get_content(sheet, i, cs.CASE_HEADERS))
+        testCode = str(int(excel.get_content(sheet, i, cs.CASE_CODE)))
+        i += 1
+        yield Request(testUrl, self.parse, meta={'testCode': testCode, 'testNumber': testNumber}, dont_filter=True)
+
+    def parse(self, response):
+        global i
+        if i < rows:
+            testNumber = str(int(excel.get_content(sheet, i, cs.CASE_NUMBER)))
+            testName = excel.get_content(sheet, i, cs.CASE_NAME)
+            testUrl = excel.get_content(sheet, i, cs.CASE_URL)
+            testUrl = base_url + testUrl
+            testMethod = excel.get_content(sheet, i, cs.CASE_METHOD)
+            testHeaders = eval(excel.get_content(sheet, i, cs.CASE_HEADERS))
+            testCode = str(int(excel.get_content(sheet, i, cs.CASE_CODE)))
+            i += 1
+            yield Request(testUrl, self.parse, meta={'testCode': testCode, 'testNumber': testNumber}, dont_filter=True)
+
+    @classmethod
+    def from_crawler(cls, crawler):
+        # This method is used by Scrapy to create your spiders.
+        s = cls()
+        crawler.signals.connect(s.spider_opened, signal=signals.spider_opened)
+        crawler.signals.connect(s.spider_closed, signal=signals.spider_closed)
+        return s
+
+    def spider_opened(self, spider):
+        spider.logger.info("-------------- Execute TestCases ---------------")
+
+    def spider_closed(self,spider):
+        spider.logger.info("--------------- Get the result ----------------- %s", cs.EXEC_RESULT)

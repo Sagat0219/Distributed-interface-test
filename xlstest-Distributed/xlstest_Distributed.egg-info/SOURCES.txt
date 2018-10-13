@@ -1,0 +1,17 @@
+setup.py
+xlstest/__init__.py
+xlstest/items.py
+xlstest/middlewares.py
+xlstest/pipelines.py
+xlstest/settings.py
+xlstest/case/test.xlsx
+xlstest/func/__init__.py
+xlstest/func/constants.py
+xlstest/func/excel.py
+xlstest/spiders/__init__.py
+xlstest/spiders/httpbin.py
+xlstest_Distributed.egg-info/PKG-INFO
+xlstest_Distributed.egg-info/SOURCES.txt
+xlstest_Distributed.egg-info/dependency_links.txt
+xlstest_Distributed.egg-info/entry_points.txt
+xlstest_Distributed.egg-info/top_level.txt
