@@ -4,7 +4,9 @@
 可将整个项目文件夹（xlstest-Distributed）部署到scrapyd服务程序中，通过schedule.json调度运行：  
 `curl http://127.0.0.1:6800/schedule.json -d project=xlstest -d spider=httpbin`  
 
-**推荐的用法是部署到docker容器中，通过本地安装Gerapy进行分布式管理**
+**推荐的用法是部署到docker容器中，通过本地安装Gerapy进行分布式管理**  
+## 架构图  
+![Image text](https://github.com/Sagat0219/Distributed-interface-test/blob/master/frame.jpg)  
 
 ## 本地安装：  
 **Docker**  
@@ -56,4 +58,16 @@ setup(
 将整个xlstest-Distributed文件夹拷贝到Gerapy的projects文件夹下(~\gerapy\projects)  
 通过浏览器访问Gerapy(http://127.0.0.1:8000/)  
 在“项目管理”中进行打包并部署到指定的主机（主机即是docker容器）  
-然后就可以在“主机管理”选择对应的主机点击“运行”来执行调度了。
+然后就可以在“主机管理”选择对应的主机点击“运行”来执行调度了。  
+
+### 相关截图  
+> *项目管理*  
+![Image text](https://github.com/Sagat0219/Distributed-interface-test/blob/master/ss1.png)  
+> *项目打包和部署*  
+![Image text](https://github.com/Sagat0219/Distributed-interface-test/blob/master/ss2.png)  
+> *主机管理*  
+![Image text](https://github.com/Sagat0219/Distributed-interface-test/blob/master/ss3.png)  
+> *任务调度运行*  
+![Image text](https://github.com/Sagat0219/Distributed-interface-test/blob/master/ss4.png)  
+> *执行完后的日志查看*  
+![Image text](https://github.com/Sagat0219/Distributed-interface-test/blob/master/ss5-log.png)    
