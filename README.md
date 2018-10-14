@@ -12,8 +12,8 @@
 **Docker**  
 **Redis**  
 **Gerapy**  
-ps: redis记得要设置允许远程访问。  
-设置文件在：C:\Program Files\Redis\redis.windows-service.conf  
+> PS: redis记得要设置允许远程访问。  
+> 设置文件在：C:\Program Files\Redis\redis.windows-service.conf  
 `# bind 127.0.0.1 -- 注释掉`  
 `protected-mode no --设置为 no,表明不已保护模式运行`  
 
