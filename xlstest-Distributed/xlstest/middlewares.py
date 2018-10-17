@@ -9,9 +9,12 @@ import scrapy
 from scrapy import signals
 from .func import constants as cs
 import logging
+import pymysql
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 logger = logging.getLogger()
+
+DB = pymysql.connect('IP address', 'username', 'password', 'databasename', charset='utf8', port=3306)
 
 class XlstestSpiderMiddleware(object):
     # Not all methods need to be defined. If a method is not defined,
@@ -68,6 +71,7 @@ class XlstestSpiderMiddleware(object):
         cs.FailResults.padding_width = 1    #列数据左右的空格数量
         spider.logger.info("FailureInfo")
         spider.logger.info('\n'+cs.FailResults.get_string(sortby="Number")) #输出执行失败的行表(按Number字段排序)
+        DB.close()
 
 class XlstestDownloaderMiddleware(object):
     # Not all methods need to be defined. If a method is not defined,
@@ -123,13 +127,21 @@ class HttpbinMiddleware():
         expectCode = request.meta.get('testCode', 1)    #预期值
         actualCode = str(response.status)   #获取返回状态代码
 
+        result = True
         if int(float(actualCode)) == int(float(expectCode)):
             logger.info("Number %s", int(testNumber))
             logger.info("Result %s", 'PASS')
         else:
+            result = False
             cs.EXEC_RESULT = False
             #添加失败的用例信息到结果表(全部执行完最后输出到日志)
             cs.FailResults.add_row([int(testNumber),request.url,actualCode,int(float(expectCode))])
             logger.info("FailCase %s", int(testNumber))
+
+        #将所有执行结果记录到本地Mysql数据库
+        sql = 'insert into testresult(TestNumber, URL, ActualCode, ExpectCode, Result) values(%s,%s,%s,%s,%s)'
+        cursor = DB.cursor()
+        cursor.execute(sql,(testNumber, request.url, actualCode, expectCode, result))
+        DB.commit()
 
         return response
