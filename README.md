@@ -1,10 +1,14 @@
 # Distributed-interface-test (MySqlDB)
 此分支添加了将执行结果存储到mysql数据的功能  
 使用前需自动创建库和表：  
-`CREATE DATABASE Interfacetest DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;  
-`CREATE TABLE TestResult (ID int(4) primary key NOT NULL auto_increment, TestNumber INT(4) NULL, URL VARCHAR(255) NULL, ActualCode INT(4) NULL, ExpectCode INT(4) NULL, Result TINYINT(1) NULL);  
-然后修改middlewares.py文件里的配置行即可:  
-`DB = pymysql.connect('IP address', 'username', 'password', 'databasename', charset='utf8', port=3306)  
+```sql
+CREATE DATABASE Interfacetest DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci；
+CREATE TABLE TestResult (ID int(4) primary key NOT NULL auto_increment, TestNumber INT(4) NULL, URL VARCHAR(255) NULL, ActualCode INT(4) NULL, ExpectCode INT(4) NULL, Result TINYINT(1) NULL);  
+```
+最后修改middlewares.py文件里的配置行即可:  
+```python
+DB = pymysql.connect('IP address', 'username', 'password', 'databasename', charset='utf8', port=3306)
+```  
 
 本套自动化接口测试框架是利用scrapy爬虫框架来实现的。  
 可将整个项目文件夹（xlstest-Distributed）部署到scrapyd服务程序中，通过schedule.json调度运行：  
