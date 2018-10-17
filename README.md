@@ -10,6 +10,7 @@ CREATE TABLE TestResult (ID int(4) primary key NOT NULL auto_increment, TestNumb
 DB = pymysql.connect('IP address', 'username', 'password', 'databasename', charset='utf8', port=3306)
 ```  
 
+=============    
 本套自动化接口测试框架是利用scrapy爬虫框架来实现的。  
 可将整个项目文件夹（xlstest-Distributed）部署到scrapyd服务程序中，通过schedule.json调度运行：  
 `curl http://127.0.0.1:6800/schedule.json -d project=xlstest -d spider=httpbin`  
