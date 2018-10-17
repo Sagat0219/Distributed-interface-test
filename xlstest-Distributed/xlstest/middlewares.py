@@ -14,7 +14,7 @@ import pymysql
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 logger = logging.getLogger()
 
-DB = pymysql.connect('IP address', 'username', 'password', 'databasename', charset='utf8', port=3306)
+DB = pymysql.connect('IP address', 'username', 'password', 'Interfacetest', charset='utf8', port=3306)
 
 class XlstestSpiderMiddleware(object):
     # Not all methods need to be defined. If a method is not defined,
