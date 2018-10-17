@@ -17,7 +17,7 @@ DB = pymysql.connect('IP address', 'username', 'password', 'Interfacetest', char
 
 **推荐的用法是部署到docker容器中，通过本地安装Gerapy进行分布式管理**  
 ## 架构图  
-![Image text](https://github.com/Sagat0219/Distributed-interface-test/blob/master/frame.jpg)  
+![Image text](https://github.com/Sagat0219/Distributed-interface-test/blob/master/frame2.jpg)  
 
 ## 本地安装：  
 **Docker**  
