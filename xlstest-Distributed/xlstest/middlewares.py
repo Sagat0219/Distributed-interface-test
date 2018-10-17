@@ -119,17 +119,17 @@ class XlstestDownloaderMiddleware(object):
 class HttpbinMiddleware():
     
     def process_response(self, request, response, spider):
-        testNumber = request.meta.get('testNumber', 1)  #用例编号
-        expectCode = request.meta.get('testCode', 1)    #预期值
-        actualCode = str(response.status)   #获取返回状态代码
+        testNumber = int(request.meta.get('testNumber', 1))  #用例编号
+        expectCode = int(float(request.meta.get('testCode', 1)))    #预期值
+        actualCode = int(response.status)   #获取返回状态代码
 
-        if int(float(actualCode)) == int(float(expectCode)):
-            logger.info("Number %s", int(testNumber))
+        if actualCode == expectCode:
+            logger.info("Number %s", testNumber)
             logger.info("Result %s", 'PASS')
         else:
             cs.EXEC_RESULT = False
             #添加失败的用例信息到结果表(全部执行完最后输出到日志)
-            cs.FailResults.add_row([int(testNumber),request.url,actualCode,int(float(expectCode))])
-            logger.info("FailCase %s", int(testNumber))
+            cs.FailResults.add_row([testNumber,request.url,actualCode,expectCode])
+            logger.info("FailCase %s", testNumber)
 
         return response
