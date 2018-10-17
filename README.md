@@ -1,6 +1,6 @@
 # Distributed-interface-test (MySqlDB)
 此分支添加了将执行结果存储到mysql数据的功能  
-使用前需自动创建库和表：  
+使用前需手动自行创建库和表：  
 ```sql
 CREATE DATABASE Interfacetest DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci；
 CREATE TABLE TestResult (ID int(4) primary key NOT NULL auto_increment, TestNumber INT(4) NULL, URL VARCHAR(255) NULL, ActualCode INT(4) NULL, ExpectCode INT(4) NULL, Result TINYINT(1) NULL);  
