@@ -29,7 +29,7 @@ DB = pymysql.connect('IP address', 'username', 'password', 'Interfacetest', char
 `protected-mode no --设置为 no,表明不已保护模式运行`  
 
 ## 容器要求：
-已安装python3.6及相关第三方库（xlrd,prettytable,setuptools,Scrapy,pymysql）  
+已安装python3.6及相关第三方库（xlrd, prettytable, setuptools, Scrapy, pymysql）  
 或可直接使用我创建的镜像来生成容器：  
 `docker pull sagat0219/scrapyd`  
 `docker run -d -p 6800:6800 sagat0219/scrapyd:v1 scrapyd`  
